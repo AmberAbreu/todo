@@ -5,7 +5,7 @@ const Todo = db.define("todo", {
 	name: {
 		type: Sequelize.STRING,
 		allowNull: false,
-	},
+	}
 });
 
-module.exports = Budget;
+module.exports = Todo;

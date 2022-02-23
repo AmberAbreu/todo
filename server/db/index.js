@@ -1,6 +1,6 @@
 const db = require("./db");
 
-const Todo = require("./Todo");
+const Todo = require("./models/Todo");
 
 
 //associations could go here!

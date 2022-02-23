@@ -1,11 +1,11 @@
 
 const router = require('express').Router()
-const { models: { Todos } } = require('../db.js')
-module.exports = router
+const { models: { Todo } } = require('../db')
+
 
 router.get('/', async (req, res, next) => {
 	try {
-		const todos = await Todos.findAll()
+		const todos = await Todo.findAll()
 		res.json(todos)
 	} catch (err) {
 		next(err)
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
 	try {
-		const category = await Todos.findByPk(req.params.id, { include: Expenses })
+		const category = await Todo.findByPk(req.params.id)
 		console.log(req.params.id)
 		if (category) {
 			res.json(category)
@@ -26,7 +26,7 @@ router.get('/:id', async (req, res, next) => {
 	}
 })
 
-router.post('/:id', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
 	try {
 		const createdTodo = await Todo.create(req.body)
 		res.send(createdTodo)
@@ -37,9 +37,9 @@ router.post('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
 	try {
-		const todo = await Expenses.findByPk(req.params.id)
+		const todo = await Todo.findByPk(req.params.id)
 		const updatedTodo = await todo.update(req.body)
-		res.json(updatedExpense)
+		res.json(updatedTodo)
 	} catch (err) {
 		next(err)
 	}
@@ -54,3 +54,5 @@ router.delete('/:id', async (req, res, next) => {
 		next(err)
 	}
 })
+
+module.exports = router
