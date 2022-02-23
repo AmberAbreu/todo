@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import Todo from './Todo'
-import DeleteTodo from './DeleteTodo'
+import Form from './form/Form'
+
+import { FaPlus } from 'react-icons/fa'
+
 
 export default function TodoList() {
 	const [todos, setTodos] = useState([])
+	const [addMode, setAddMode] = useState(false)
 
 	useEffect(() => {
 		async function getTodos() {
@@ -20,11 +24,18 @@ export default function TodoList() {
 	}, [])
 
 	return (
-		<div>
+		<div className='todo-list'>
+			<h1>Things to do</h1>
+			{addMode ?
+				(<Form />)
+				: <div className='icon' onClick={() => setAddMode(!addMode)} ><FaPlus /></div>
+			}
+
 			{todos.map(todo => {
 				return (
 					<Todo
 						todo={todo}
+						key={todo.id}
 					/>
 				)
 			})}

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
 function TodoForm({ todo }) {
-	const { name, id, isComplete } = todo
+
 	const [input, setInput] = useState(todo ? todo.name : '')
 
 	const inputRef = useRef(null)
@@ -19,16 +19,22 @@ function TodoForm({ todo }) {
 		e.preventDefault();
 		if (todo) {
 			function updateTodo() {
-				axios.put(`/todos/${id}`, {
+				axios.put(`/todos/${todo.id}`, {
 					name: input
 				})
 			}
 			updateTodo()
 		} else {
 			function addTodo() {
-				axios.post(`/todos`, {
-					name: input
-				})
+				try {
+					axios.post(`/todos`, {
+						name: input,
+						isComplete: false
+					})
+				} catch (error) {
+					console.log(error);
+				}
+
 			}
 			addTodo()
 		}
