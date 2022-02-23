@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import Form from './form/Form'
+import Form from './Form'
 
 import { FaEdit } from 'react-icons/fa'
 import { FaTrashAlt } from 'react-icons/fa'

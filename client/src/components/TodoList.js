@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import Todo from './Todo'
-import Form from './form/Form'
+import Form from './Form'
 
 import { FaPlus } from 'react-icons/fa'
 
