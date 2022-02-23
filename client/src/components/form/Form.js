@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
-function TodoForm({ todo }) {
+function TodoForm({ todo, setEditMode, setAddMode }) {
 
 	const [input, setInput] = useState(todo ? todo.name : '')
 
@@ -18,24 +18,25 @@ function TodoForm({ todo }) {
 	const handleSubmit = e => {
 		e.preventDefault();
 		if (todo) {
-			function updateTodo() {
-				axios.put(`/todos/${todo.id}`, {
+			async function updateTodo() {
+				await axios.put(`/todos/${todo.id}`, {
 					name: input
 				})
 			}
+			setEditMode(false)
 			updateTodo()
 		} else {
-			function addTodo() {
+			async function addTodo() {
 				try {
-					axios.post(`/todos`, {
+					await axios.post(`/todos`, {
 						name: input,
 						isComplete: false
 					})
 				} catch (error) {
 					console.log(error);
 				}
-
 			}
+			setAddMode(false)
 			addTodo()
 		}
 	}

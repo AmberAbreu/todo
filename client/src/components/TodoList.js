@@ -21,17 +21,21 @@ export default function TodoList() {
 			}
 		}
 		getTodos()
-	}, [])
+	}, [todos])
 
 	return (
 		<div className='todo-list'>
 			<h1>Things to do</h1>
 			{addMode ?
-				(<Form />)
+				(<Form setAddMode={setAddMode} />)
 				: <div className='icon' onClick={() => setAddMode(!addMode)} ><FaPlus /></div>
 			}
 
-			{todos.map(todo => {
+			{todos.sort(function (a, b) {
+				if (a.name < b.name) { return -1; }
+				if (a.name > b.name) { return 1; }
+				return 0;
+			}).map(todo => {
 				return (
 					<Todo
 						todo={todo}

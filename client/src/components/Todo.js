@@ -30,17 +30,23 @@ export default function Todo({ todo }) {
 
 	}
 
+	useEffect(() => {
+	}, [name])
+
+
 	return (
 		<div
 			className={isComplete ? 'todo-row complete' : 'todo-row'}
 			key={id}
 		>
 			{editMode ?
-				(<Form todo={todo} />)
+				(<Form todo={todo} setEditMode={setEditMode} />)
 				: <p onClick={markComplete}>{name}</p>
 			}
-			<div><FaEdit className='icon' onClick={() => setEditMode(!editMode)} /></div>
-			<div className='icon'><FaTrashAlt onClick={() => deleteTodo(id)} /></div>
+			<div className='icons'>
+				<div><FaEdit className='icon' onClick={() => setEditMode(!editMode)} /></div>
+				<div className='icon'><FaTrashAlt onClick={() => deleteTodo(id)} /></div>
+			</div>
 		</div>
 	)
 }
