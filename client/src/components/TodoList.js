@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import Todo from './Todo'
+import DeleteTodo from './DeleteTodo'
 
 export default function TodoList() {
 	const [todos, setTodos] = useState([])
@@ -21,7 +22,11 @@ export default function TodoList() {
 	return (
 		<div>
 			{todos.map(todo => {
-				return <Todo name={todo.name} />
+				return (
+					<Todo
+						todo={todo}
+					/>
+				)
 			})}
 		</div>
 	)

@@ -14,15 +14,19 @@ async function seed() {
 	const todos = await Promise.all([
 		Todo.create({
 			name: "Pick up groceries",
+			isComplete: true
 		}),
 		Todo.create({
 			name: "Walk dog",
+			isComplete: false
 		}),
 		Todo.create({
 			name: "Cook dinner",
+			isComplete: false
 		}),
 		Todo.create({
 			name: "Clean room",
+			isComplete: false
 		}),
 	]);
 

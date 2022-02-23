@@ -5,6 +5,10 @@ const Todo = db.define("todo", {
 	name: {
 		type: Sequelize.STRING,
 		allowNull: false,
+	},
+	isComplete: {
+		type: Sequelize.BOOLEAN,
+		allowNull: false
 	}
 });
 
