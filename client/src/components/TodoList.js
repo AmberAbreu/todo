@@ -17,7 +17,7 @@ export default function TodoList() {
 				const { data } = await axios.get('/todos')
 				setTodos(data)
 			} catch (error) {
-				console.log(error)
+				console.log(error) //show an alert to user
 			}
 		}
 		getTodos()

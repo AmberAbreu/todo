@@ -27,7 +27,6 @@ export default function Todo({ todo }) {
 		} catch (error) {
 			console.log(error);
 		}
-
 	}
 
 	useEffect(() => {

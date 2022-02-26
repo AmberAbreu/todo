@@ -1,8 +1,7 @@
-
 const router = require('express').Router()
 const { models: { Todo } } = require('../db')
 
-
+//address errors with actual status code, something with information that can be seen (UX/UI friendly)
 router.get('/', async (req, res, next) => {
 	try {
 		const todos = await Todo.findAll()
@@ -14,10 +13,9 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
 	try {
-		const category = await Todo.findByPk(req.params.id)
-		console.log(req.params.id)
-		if (category) {
-			res.json(category)
+		const todo = await Todo.findByPk(req.params.id)
+		if (todo) {
+			res.json(todo)
 		} else {
 			next({ message: "some problem occured", status: 404 })
 		}
@@ -47,9 +45,9 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
 	try {
-		const expense = await Todo.findByPk(req.params.id)
-		await expense.destroy()
-		res.json(expense)
+		const todo = await Todo.findByPk(req.params.id)
+		await todo.destroy()
+		res.json(todo)
 	} catch (err) {
 		next(err)
 	}
