@@ -10,7 +10,6 @@ app.use(express.json());
 const todos = require('./api/todos')
 
 app.use(express.static(path.resolve(__dirname, "../client/public")));
-console.log(path.resolve(__dirname, "../client/public"))
 
 app.use("/todos", todos);
 
