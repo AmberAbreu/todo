@@ -11,14 +11,15 @@ export default function TodoList() {
     const [todos, setTodos] = useState([]);
     const [addMode, setAddMode] = useState(false);
     const [openModal, setOpenModal] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
 
     const handleDeleteAll = async () => {
         try {
             await axios.delete(`/todos/`);
             setTodos([]);
         } catch (error) {
+            setErrorMsg(error.response.data);
             setOpenModal(true);
-            console.log(error);
         }
     };
 
@@ -30,7 +31,7 @@ export default function TodoList() {
                 setTodos(data);
             } catch (error) {
                 setOpenModal(true);
-                console.log(error);
+                setErrorMsg(error.response.data);
             }
         }
         getTodos();
@@ -58,6 +59,8 @@ export default function TodoList() {
                         key={todo.id}
                         setTodos={setTodos}
                         todos={todos}
+                        setOpenModal={setOpenModal}
+                        setErrorMsg={setErrorMsg}
                     />
                 );
             })}
@@ -66,7 +69,9 @@ export default function TodoList() {
                     Clear todos
                 </button>
             )}
-            {openModal && <Modal setOpenModal={setOpenModal} />}
+            {openModal && (
+                <Modal errorMsg={errorMsg} setOpenModal={setOpenModal} />
+            )}
         </div>
     );
 }

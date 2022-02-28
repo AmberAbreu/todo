@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Modal({ setOpenModal }) {
+export default function Modal({ setOpenModal, errorMsg }) {
     return (
         <div className="modalBackground">
             <div className="modalContainer">
@@ -8,7 +8,7 @@ export default function Modal({ setOpenModal }) {
                     <h1>Something went wrong.</h1>
                 </div>
                 <div className="description">
-                    <p>Please try again.</p>
+                    <p>{errorMsg}</p>
                 </div>
                 <div className="modalFooter">
                     <button

@@ -6,7 +6,13 @@ import Form from "./Form";
 import { FaEdit } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 
-export default function Todo({ todo, setTodos, todos }) {
+export default function Todo({
+    todo,
+    setTodos,
+    todos,
+    setErrorMsg,
+    setOpenModal,
+}) {
     const { name, id, isComplete } = todo;
 
     const [completion, setCompletion] = useState(todo.isComplete);
@@ -18,7 +24,7 @@ export default function Todo({ todo, setTodos, todos }) {
             await axios.delete(`/todos/${id}`);
             setTodos(todos.filter((todo) => todo.id !== id));
         } catch (error) {
-            console.log(error);
+            setOpenModal(true);
         }
     };
 
@@ -29,7 +35,8 @@ export default function Todo({ todo, setTodos, todos }) {
             });
             setCompletion(!completion);
         } catch (error) {
-            console.log(error);
+            setOpenModal(true);
+            setErrorMsg(error.response.data);
         }
     }
 
@@ -40,6 +47,8 @@ export default function Todo({ todo, setTodos, todos }) {
                     todo={todo}
                     setEditMode={setEditMode}
                     setRenderName={setRenderName}
+                    setOpenModal={setOpenModal}
+                    setErrorMsg={setErrorMsg}
                 />
             ) : (
                 <p onClick={markComplete}>{renderName}</p>

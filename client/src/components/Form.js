@@ -8,6 +8,8 @@ function TodoForm({
     setRenderName,
     setTodos,
     todos,
+    setOpenModal,
+    setErrorMsg,
 }) {
     const [input, setInput] = useState(todo ? todo.name : "");
 
@@ -31,7 +33,8 @@ function TodoForm({
                     });
                     setRenderName(data.name);
                 } catch (error) {
-                    console.log(error);
+                    setOpenModal(true);
+                    setErrorMsg(error.response.data);
                 }
             }
             setEditMode(false);
@@ -45,7 +48,8 @@ function TodoForm({
                     });
                     setTodos([...todos, data]);
                 } catch (error) {
-                    console.log(error);
+                    setOpenModal(true);
+                    setErrorMsg(error.response.data);
                 }
             }
             setAddMode(false);
